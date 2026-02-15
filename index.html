@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUMONIX AI | Production SaaS - Payment & Contact (bKash/Nagad/Rocket/Upay/Card/GPay/ApplePay/Stripe)</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primaryBlue: '#0072bc',
+                        accentCyan: '#00f2ff',
+                        bgDark: '#020617',
+                        bgLight: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', 'Hind Siliguri', sans-serif; transition: all 0.4s ease; }
+        .hero-banner { background-size: cover; background-position: center; background-attachment: fixed; position: relative; }
+        .dark .hero-banner { background-image: linear-gradient(to bottom, rgba(2, 6, 23, 0.4), rgba(2, 6, 23, 0.8)), url('desktop.png'); }
+        .light .hero-banner { background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6)), url('desktop.png'); }
+        
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .premium-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.5s; }
+        .premium-card:hover { transform: translateY(-10px); border-color: #00f2ff; box-shadow: 0 20px 40px rgba(0, 242, 255, 0.1); }
+        
+        .status-pulse { width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #10b981; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(0.9); opacity: 0.7; } 70% { transform: scale(1.3); opacity: 0; } 100% { transform: scale(0.9); opacity: 0; } }
+        
+        .typing-cursor::after { content: "|"; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
+        .dashboard-mockup { background: linear-gradient(145deg, #0f172a, #020617); border: 1px solid #1e293b; }
+        
+        .ai-glow { filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.5)); }
+        .project-img { filter: grayscale(100%); transition: 0.5s; width: 100%; height: 200px; object-fit: cover;}
+        .project-img:hover { filter: grayscale(0%); }
+
+        /* Integrated Payment Logos */
+        .bkash-svg { background: #e2136e; padding: 10px; border-radius: 8px; font-weight: 900; font-style: italic; color: white; display: inline-block; }
+        .nagad-svg { background: #f37021; padding: 10px; border-radius: 8px; font-weight: 900; color: white; display: inline-block; }
+        .rocket-svg { background: #8c1515; padding: 10px; border-radius: 8px; font-weight: 900; color: white; display: inline-block; }
+    </style>
+</head>
+<body class="bg-bgLight text-slate-900 dark:bg-bgDark dark:text-white overflow-x-hidden">
+
+    <nav class="fixed w-full z-[100] py-4 bg-white/80 dark:bg-bgDark/80 backdrop-blur-xl border-b dark:border-white/5">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <svg width="40" height="40" viewBox="0 0 100 100" class="ai-glow">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#00f2ff" stroke-width="2" />
+                    <path d="M30 70 L50 30 L70 70" fill="none" stroke="#0072bc" stroke-width="8" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="8" fill="#00f2ff">
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" />
+                    </circle>
+                </svg>
+                <span class="text-xl font-black italic uppercase tracking-tighter hidden sm:inline">Sumonix AI</span>
+            </div>
+            
+            <div class="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400">
+                <a href="#hero" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Home</a>
+                <a href="#workflow" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Work</a>
+                <a href="#demo" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Demo</a>
+                <a href="#download" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Download</a>
+                <a href="#pricing" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Pricing</a>
+                <a href="#payment" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Payments</a>
+                <a href="#contact" class="hover:text-primaryBlue dark:hover:text-accentCyan transition text-primaryBlue">Contact</a>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleTheme()" class="p-2 rounded-full bg-slate-100 dark:bg-white/10 transition"><i id="theme-icon" class="fas fa-moon"></i></button>
+                <button onclick="toggleLanguage()" class="px-3 py-1 rounded-md bg-primaryBlue text-white text-[10px] font-bold uppercase"><span id="lang-btn-text">BN</span></button>
+                <a href="#dashboard" class="bg-primaryBlue hover:bg-blue-600 px-5 py-2 rounded-xl text-[10px] font-black uppercase text-white tracking-widest">Sign In</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="hero-banner min-h-screen flex items-center justify-center px-6 pt-20">
+        <div class="max-w-6xl mx-auto text-center" data-aos="zoom-out">
+            <div class="inline-flex items-center bg-white/5 px-4 py-1 rounded-full border border-white/10 mb-8">
+                <span class="status-pulse mr-3"></span>
+                <span class="text-[9px] font-bold uppercase tracking-widest text-green-500 italic">Global System Live v2.5</span>
+            </div>
+            <h1 class="text-6xl md:text-9xl font-black tracking-tighter leading-tight mb-8 bg-gradient-to-b from-slate-900 to-slate-500 dark:from-white dark:to-gray-500 bg-clip-text text-transparent italic">
+                Sumonix <span class="text-primaryBlue dark:text-accentCyan">AI.</span>
+            </h1>
+            <p class="text-slate-600 dark:text-gray-400 text-lg md:text-2xl max-w-3xl mx-auto mb-12 font-light lang-en italic">
+                Integrated Systems Architect: **Mumain Ahmed Sumon**. <br>
+                <span class="text-sm uppercase tracking-widest font-bold text-primaryBlue">Multilingual • Autonomous • Secure • Real-time</span>
+            </p>
+            <p class="text-slate-600 dark:text-gray-400 text-lg md:text-2xl max-w-3xl mx-auto mb-12 font-light lang-bn hidden italic">
+                ইন্টিগ্রেটেড সিস্টেম আর্কিটেক্ট: **মুমাইন আহমেদ সুমন**। <br>
+                <span class="text-sm uppercase tracking-widest font-bold text-primaryBlue">বহুভাষী • স্বায়ত্তশাসিত • নিরাপদ • রিয়েল-টাইম</span>
+            </p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="#download" class="bg-primaryBlue hover:bg-blue-600 text-white px-14 py-5 rounded-2xl text-[11px] font-black uppercase tracking-[3px] shadow-2xl transition"><i class="fas fa-download mr-2"></i> Download Ecosystem</a>
+                <a href="#contact" class="px-14 py-5 rounded-2xl text-[11px] font-black uppercase tracking-[3px] border border-slate-300 dark:border-gray-800 hover:bg-white/5 transition"><i class="fas fa-envelope mr-2"></i> Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="workflow" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h3 class="text-primaryBlue font-black text-[10px] uppercase tracking-[8px] mb-4">Ecosystem Workflow</h3>
+                <h2 class="text-5xl font-black tracking-tight">Seamless Technical Services.</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-12 mt-16">
+                <div class="premium-card p-6 rounded-[40px]" data-aos="fade-up">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=500" class="project-img rounded-3xl mb-6 shadow-xl" alt="POS">
+                    <h4 class="text-xl font-bold mb-2 uppercase italic">SmartShop POS</h4>
+                    <p class="text-gray-500 text-[10px] tracking-widest font-bold mb-4 text-primaryBlue uppercase italic">Feature: Inventory & Sales Automation</p>
+                    <p class="text-gray-400 text-sm font-light">Advanced point-of-sale system built for ABO Enterprise retail partners.</p>
+                </div>
+                <div class="premium-card p-6 rounded-[40px]" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=500" class="project-img rounded-3xl mb-6 shadow-xl" alt="Agent">
+                    <h4 class="text-xl font-bold mb-2 uppercase italic">Aegis AI X</h4>
+                    <p class="text-gray-500 text-[10px] tracking-widest font-bold mb-4 text-primaryBlue uppercase italic">Feature: Autonomous Reasoning Engine</p>
+                    <p class="text-gray-400 text-sm font-light">Custom agentic ecosystem for technical solution architects.</p>
+                </div>
+                <div class="premium-card p-6 rounded-[40px]" data-aos="fade-up" data-aos-delay="200">
+                    <img src="civic picture.jpeg" class="project-img rounded-3xl mb-6 shadow-xl" alt="Civic">
+                    <h4 class="text-xl font-bold mb-2 uppercase italic">Civic Hub</h4>
+                    <p class="text-gray-400 text-[10px] tracking-widest font-bold mb-4 text-primaryBlue uppercase italic">Feature: Q&A Engagement Engine</p>
+                    <p class="text-gray-400 text-sm font-light text-slate-500">platform for citizen engagement and political transparency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="py-24 px-6 bg-slate-100 dark:bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h3 class="text-primaryBlue font-black text-[10px] uppercase tracking-[8px] mb-4">Live Animation</h3>
+                <h2 class="text-5xl font-black tracking-tight">System v2.5 Experience.</h2>
+            </div>
+            <div class="max-w-5xl mx-auto premium-card rounded-[50px] overflow-hidden shadow-2xl relative bg-black/60">
+                <div class="p-12 min-h-[450px] flex flex-col justify-center">
+                    <div class="mb-12" data-aos="fade-right">
+                        <span class="text-blue-500 font-black text-[11px] uppercase tracking-[4px] mb-4 block italic">User Input:</span>
+                        <p id="demo-query" class="text-3xl font-light text-gray-400 italic"></p>
+                    </div>
+                    <div data-aos="fade-left">
+                        <span class="text-green-500 font-black text-[11px] uppercase tracking-[4px] mb-4 block italic">Sumonix AI:</span>
+                        <p id="demo-response" class="text-2xl leading-relaxed text-white typing-cursor font-light"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto text-center mb-20">
+            <h3 class="text-primaryBlue font-black text-[10px] uppercase tracking-[8px] mb-4">Download Center</h3>
+            <h2 class="text-5xl font-black tracking-tight">Available on Every OS.</h2>
+        </div>
+        <div class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-6 max-w-7xl mx-auto">
+            <div class="premium-card p-8 rounded-[30px] text-center" data-aos="zoom-in">
+                <i class="fab fa-android text-4xl text-green-500 mb-6 drop-shadow-md"></i>
+                <h4 class="font-bold mb-4 uppercase text-xs">Android</h4>
+                <button class="w-full py-3 bg-white/5 rounded-xl text-[9px] font-bold uppercase hover:bg-primaryBlue transition border border-white/10">APK Download</button>
+            </div>
+            <div class="premium-card p-8 rounded-[30px] text-center shadow-2xl border-primaryBlue/30" data-aos="zoom-in" data-aos-delay="100">
+                <i class="fab fa-windows text-4xl text-blue-500 mb-6"></i>
+                <h4 class="font-bold mb-4 uppercase text-xs">Windows</h4>
+                <button class="w-full py-3 bg-primaryBlue text-white rounded-xl text-[9px] font-bold uppercase hover:bg-blue-600 transition shadow-lg">Download EXE</button>
+            </div>
+            <div class="premium-card p-8 rounded-[30px] text-center" data-aos="zoom-in" data-aos-delay="200">
+                <i class="fab fa-apple text-4xl dark:text-white mb-6"></i>
+                <h4 class="font-bold mb-4 uppercase text-xs">iOS / Mac</h4>
+                <button class="w-full py-3 bg-white/5 rounded-xl text-[9px] font-bold uppercase hover:bg-primaryBlue transition border border-white/10">App Store</button>
+            </div>
+            <div class="premium-card p-8 rounded-[30px] text-center" data-aos="zoom-in" data-aos-delay="300">
+                <i class="fab fa-linux text-4xl text-orange-500 mb-6"></i>
+                <h4 class="font-bold mb-4 uppercase text-xs">Linux</h4>
+                <button class="w-full py-3 bg-white/5 rounded-xl text-[9px] font-bold uppercase hover:bg-primaryBlue transition border border-white/10">Get Snap</button>
+            </div>
+            <div class="premium-card p-8 rounded-[30px] text-center" data-aos="zoom-in" data-aos-delay="400">
+                <i class="fas fa-desktop text-4xl text-gray-400 mb-6"></i>
+                <h4 class="font-bold mb-4 uppercase text-xs">macOS</h4>
+                <button class="w-full py-3 bg-white/5 rounded-xl text-[9px] font-bold uppercase hover:bg-primaryBlue transition border border-white/10">Download DMG</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl font-black text-center mb-20 tracking-tight italic text-glow uppercase">Pricing Tiers.</h2>
+            <div class="grid lg:grid-cols-5 md:grid-cols-3 gap-6">
+                <div class="premium-card p-8 rounded-[40px] flex flex-col justify-between" data-aos="fade-up">
+                    <div><h4 class="text-gray-500 font-bold text-[10px] uppercase mb-4 tracking-widest italic">Free Edition</h4><div class="text-4xl font-black mb-6">$0</div><ul class="text-gray-500 text-[9px] space-y-3 font-light"><li>100 Messages / mo</li><li>Standard Core</li></ul></div>
+                    <button class="mt-8 py-3 rounded-xl border border-gray-800 text-[9px] font-bold uppercase">Get Started</button>
+                </div>
+                <div class="premium-card p-8 rounded-[40px] flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+                    <div><h4 class="text-primaryBlue font-bold text-[10px] uppercase mb-4 tracking-widest italic text-glow">GO Starter</h4><div class="text-4xl font-black mb-6">$8</div><ul class="text-gray-400 text-[9px] space-y-3 font-light"><li>Mobile Apps Only</li><li>High Response</li></ul></div>
+                    <button class="mt-8 py-3 rounded-xl border border-primaryBlue text-[9px] font-bold uppercase">Subscribe</button>
+                </div>
+                <div class="premium-card p-8 rounded-[40px] border-blue-500 bg-blue-500/5 relative scale-105 flex flex-col justify-between shadow-2xl" data-aos="fade-up" data-aos-delay="200">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-[8px] font-black px-4 py-1 rounded-full uppercase text-white shadow-lg">Popular</span>
+                    <div><h4 class="text-accentCyan font-bold text-[10px] uppercase mb-4 tracking-widest italic">Enterprise PRO</h4><div class="text-4xl font-black mb-6">$15</div><ul class="text-slate-300 text-[9px] space-y-3 font-light"><li>Unlimited Multimodal</li><li>Image Gen (DALL-E)</li><li>Priority API</li></ul></div>
+                    <button class="mt-8 bg-primaryBlue text-white py-3 rounded-xl text-[9px] font-bold uppercase">Upgrade Now</button>
+                </div>
+                <div class="premium-card p-8 rounded-[40px] flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
+                    <div><h4 class="text-orange-400 font-bold text-[10px] uppercase mb-4 tracking-widest italic">Ultra Max</h4><div class="text-4xl font-black mb-6">$25</div><ul class="text-gray-400 text-[9px] space-y-3 font-light"><li>Autonomous Reasoning</li><li>Advanced Analytics</li></ul></div>
+                    <button class="mt-8 py-3 rounded-xl border border-gray-800 text-[9px] font-bold uppercase">Go Ultra</button>
+                </div>
+                <div class="premium-card p-8 rounded-[40px] flex flex-col justify-between border-purple-500/20" data-aos="fade-up" data-aos-delay="400">
+                    <div><h4 class="text-purple-400 font-bold text-[10px] uppercase mb-4 tracking-widest italic">Ultra PRO</h4><div class="text-4xl font-black mb-6">$49</div><ul class="text-gray-400 text-[9px] space-y-3 font-light"><li>Custom Model Tuning</li><li>Founder Support</li></ul></div>
+                    <button class="mt-8 py-3 rounded-xl border border-gray-800 text-[9px] font-bold uppercase">Enterprise</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 px-6 bg-white/[0.01]">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl font-black text-center mb-20 tracking-tight italic uppercase">Customer Reviews.</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="premium-card p-12 rounded-[50px] border border-white/5" data-aos="fade-right">
+                    <div class="flex text-yellow-500 mb-6 text-sm italic"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i> <span class="ml-4 text-slate-500 font-bold tracking-widest uppercase text-[9px] mt-1">Verified Client</span></div>
+                    <p class="text-gray-300 text-xl italic mb-8 font-light leading-relaxed">"The Sumonix AI ecosystem has fundamentally changed our technical efficiency. The reasoning engine is truly autonomous and secure."</p>
+                    <div class="flex items-center space-x-6">
+                        <div class="w-16 h-16 bg-blue-900/30 rounded-2xl flex items-center justify-center font-black text-blue-500 border border-blue-500/20 shadow-inner">AK</div>
+                        <div><h5 class="font-black text-white italic tracking-tighter">Ahmed Kabir</h5><p class="text-[9px] text-gray-600 uppercase tracking-widest font-black">Tech Director, Global Solution</p></div>
+                    </div>
+                </div>
+                <div class="premium-card p-12 rounded-[50px] border border-white/5" data-aos="fade-left">
+                    <div class="flex text-yellow-500 mb-6 text-sm italic"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i> <span class="ml-4 text-slate-500 font-bold tracking-widest uppercase text-[9px] mt-1">Corporate Partner</span></div>
+                    <p class="text-gray-300 text-xl italic mb-8 font-light leading-relaxed">"Masterful architecture. The system's ability to handle complex multilingual nuances is the best I've seen in any AI platform."</p>
+                    <div class="flex items-center space-x-6">
+                        <div class="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center font-black text-slate-400 border border-slate-400/20 shadow-inner">JD</div>
+                        <div><h5 class="font-black text-white italic tracking-tighter">John Doe</h5><p class="text-[9px] text-gray-600 uppercase tracking-widest font-black">Systems Architect, US Enterprise</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="payment" class="py-24 px-6 bg-slate-100 dark:bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h3 class="text-primaryBlue font-black text-[10px] uppercase tracking-[8px] mb-4">Checkout Gateways</h3>
+                <h2 class="text-4xl font-black tracking-tight">Global & Local Payments.</h2>
+                <p class="text-xs text-gray-500 mt-2 uppercase tracking-widest">bKash | Nagad | Rocket | Upay | Card | GPay | ApplePay | Stripe</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 text-center">
+                <div class="premium-card p-6 rounded-2xl bg-white dark:bg-white/5 flex flex-col items-center justify-center h-28">
+                    <span class="bkash-svg mb-2 text-xl px-4 py-1">bKash</span>
+                    <span class="text-[8px] font-bold uppercase tracking-widest text-gray-500 italic">MFS</span>
+                </div>
+                <div class="premium-card p-6 rounded-2xl bg-white dark:bg-white/5 flex flex-col items-center justify-center h-28">
+                    <span class="nagad-svg mb-2 text-lg px-4 py-1">নগদ</span>
+                    <span class="text-[8px] font-bold uppercase tracking-widest text-gray-500 italic">MFS</span>
+                </div>
+                <div class="premium-card p-6 rounded-2xl bg-white dark:bg-white/5 flex flex-col items-center justify-center h-28">
+                    <span class="rocket-svg mb-2 text-lg px-3 py-1">Rocket</span>
+                    <span class="text-[8px] font-bold uppercase tracking-widest text-gray-500 italic">DBBL</span>
+                </div>
+                <div class="premium-card p-6 rounded-2xl bg-white dark:bg-white/5 flex flex-col items-center justify-center h-28">
+                    <i class="fas fa-wallet text-3xl text-yellow-500 mb-2"></i>
+                    <span class="text-[8px] font-bold uppercase tracking-widest text-gray-500 italic">Upay</span>
+                </div>
+                <div class="premium-card p-6 rounded-2xl bg-white dark:bg-white/5 flex flex-col items-center justify-center h-28">
+                    <div class="flex gap-2 text-3xl text-blue-600 mb-2">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                    </div>
+                    <span class="text-[8px] font-bold uppercase tracking-widest text-gray-500 italic">Card</span>
+                </div>
+                <div class="premium-card p-6 rounded-2xl bg-white dark:bg-white/5 flex flex-col items-center justify-center h-28">
+                    <i class="fab fa-google-pay text-4xl text-slate-800 dark:text-white mb-2"></i>
+                    <span class="text-[8px] font-bold uppercase tracking-widest text-gray-500 italic">GPay</span>
+                </div>
+                <div class="premium-card p-6 rounded-2xl bg-white dark:bg-white/5 flex flex-col items-center justify-center h-28">
+                    <i class="fab fa-apple-pay text-4xl text-slate-800 dark:text-white mb-2"></i>
+                    <span class="text-[8px] font-bold uppercase tracking-widest text-gray-500 italic">ApplePay</span>
+                </div>
+                <div class="premium-card p-6 rounded-2xl bg-white dark:bg-white/5 flex flex-col items-center justify-center h-28">
+                    <i class="fab fa-stripe text-4xl text-indigo-500 mb-2"></i>
+                    <span class="text-[8px] font-bold uppercase tracking-widest text-gray-500 italic">Stripe</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+            <div data-aos="fade-right">
+                <h3 class="text-primaryBlue font-black text-[10px] uppercase tracking-[8px] mb-8">Global Reach</h3>
+                <h4 class="text-5xl lg:text-6xl font-black tracking-tighter leading-tight mb-10 text-slate-900 dark:text-white">Get in Touch.</h4>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="space-y-4 text-slate-600 dark:text-gray-400 text-sm">
+                        <h5 class="text-primaryBlue font-bold uppercase tracking-widest text-xs border-b border-primaryBlue/20 pb-2 mb-4">Company Details</h5>
+                        <p class="flex items-center"><i class="fas fa-globe text-primaryBlue w-6"></i> <a href="https://www.aboenterprice.com" target="_blank" class="hover:text-primaryBlue transition-colors font-medium">www.aboenterprice.com</a></p>
+                        <p class="flex items-center"><i class="fas fa-envelope text-primaryBlue w-6"></i> <a href="mailto:abo.enterprise@gmail.com" class="hover:text-primaryBlue transition-colors text-xs">abo.enterprise@gmail.com</a></p>
+                        <p class="flex items-center"><i class="fab fa-facebook text-primaryBlue w-6"></i> <a href="https://www.facebook.com/abo.enterprise" target="_blank" class="hover:text-primaryBlue transition-colors">abo.enterprise</a></p>
+                        <p class="flex items-start"><i class="fas fa-map-marker-alt text-primaryBlue w-6 mt-1"></i> <span>Beanibazar, Sylhet,<br>Bangladesh</span></p>
+                    </div>
+
+                    <div class="space-y-4 text-slate-600 dark:text-gray-400 text-sm">
+                        <h5 class="text-primaryBlue font-bold uppercase tracking-widest text-xs border-b border-primaryBlue/20 pb-2 mb-4">Founder Direct</h5>
+                        <p class="font-bold text-slate-800 dark:text-white mb-2"><i class="fas fa-user-tie text-primaryBlue w-6"></i> Mumain Ahmed Sumon</p>
+                        <p class="flex items-center"><i class="fas fa-phone text-primaryBlue w-6"></i> <a href="tel:+8801825007977" class="hover:text-primaryBlue transition-colors">+8801825007977</a></p>
+                        <p class="flex items-center"><i class="fas fa-envelope text-primaryBlue w-6"></i> <a href="mailto:m.a.sumon92@gmail.com" class="hover:text-primaryBlue transition-colors text-xs">m.a.sumon92@gmail.com</a></p>
+                        <p class="flex items-center"><i class="fab fa-facebook-square text-primaryBlue w-6"></i> <a href="https://www.facebook.com/mumain.sumon" target="_blank" class="hover:text-primaryBlue transition-colors text-xs">mumain.sumon</a></p>
+                    </div>
+                </div>
+
+                <div class="flex space-x-6 text-2xl">
+                    <a href="https://www.facebook.com/abo.enterprise" target="_blank" class="w-12 h-12 rounded-full bg-slate-200 dark:bg-white/5 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-sm"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/8801825007977" target="_blank" class="w-12 h-12 rounded-full bg-slate-200 dark:bg-white/5 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all shadow-sm"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:m.a.sumon92@gmail.com" class="w-12 h-12 rounded-full bg-slate-200 dark:bg-white/5 flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-sm"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="rounded-[40px] overflow-hidden grayscale invert dark:opacity-40 hover:grayscale-0 hover:invert-0 hover:opacity-100 transition-all duration-700 h-[450px] shadow-2xl border border-white/5" data-aos="fade-left">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115858.98363712882!2d92.1009139!3d24.8433989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3751ca3861219b4b%3A0xf601e3505c2a13cc!2sBeanibazar%20Upazila!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="license" class="py-24 px-6 bg-white/[0.01]">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-slate-50 dark:bg-white/5 p-12 rounded-[50px] border border-primaryBlue/20 shadow-2xl" data-aos="fade-up">
+                <div class="flex items-center justify-center mb-6"><i class="fas fa-key text-primaryBlue text-3xl"></i></div>
+                <h3 class="text-3xl font-black mb-4 lang-en uppercase tracking-tighter text-center">License Activation</h3>
+                <h3 class="text-3xl font-black mb-4 lang-bn hidden uppercase tracking-tighter text-center">লাইসেন্স অ্যাক্টিভেশন</h3>
+                <div class="flex flex-col md:flex-row gap-4 mt-8">
+                    <input type="text" placeholder="XXXXX-XXXXX-XXXXX-XXXXX-XXXXX" class="flex-1 bg-white dark:bg-black/40 border border-slate-300 dark:border-white/10 rounded-2xl px-6 py-4 text-primaryBlue dark:text-accentCyan font-mono tracking-widest focus:outline-none shadow-inner uppercase text-center">
+                    <button class="bg-primaryBlue text-white px-10 py-4 rounded-2xl font-bold uppercase text-[10px] tracking-widest shadow-lg hover:bg-blue-600 transition">Verify Engine</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-100 dark:bg-black py-20 px-6 border-t border-slate-200 dark:border-white/5 text-center">
+        <div class="flex flex-col items-center mb-8">
+            <img src="logo final.jpeg" alt="Logo" class="h-14 mb-4 rounded-full opacity-80 border-2 border-primaryBlue/20">
+            <h5 class="text-sm font-black italic tracking-widest uppercase text-slate-800 dark:text-slate-200">ABO ENTERPRISE</h5>
+        </div>
+        <p class="text-[10px] font-bold uppercase tracking-[4px] text-slate-500 mb-2">© 2026 ABO ENTERPRISE | <a href="https://www.aboenterprice.com" class="hover:text-primaryBlue transition-colors">WWW.ABOENTERPRICE.COM</a></p>
+        <p class="text-[10px] font-bold uppercase tracking-[4px] text-slate-500">INTEGRATED SYSTEMS ARCHITECT: MUMAIN AHMED SUMON</p>
+        <p class="mt-4 text-primaryBlue font-bold text-xs uppercase tracking-widest">Simple Solutions for a Global Future</p>
+        <p class="mt-1 text-[8px] text-slate-400 font-mono tracking-tighter">Beanibazar, Sylhet, Bangladesh</p>
+    </footer>
+
+    <div class="chat-widget">
+        <a href="https://wa.me/8801825007977" target="_blank" class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-3xl shadow-2xl hover:scale-110 transition-transform">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.replace('dark', 'light');
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.theme = 'light';
+            } else {
+                html.classList.replace('light', 'dark');
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.theme = 'dark';
+            }
+        }
+
+        let currentLang = 'en';
+        function toggleLanguage() {
+            const btnText = document.getElementById('lang-btn-text');
+            const enEls = document.querySelectorAll('.lang-en');
+            const bnEls = document.querySelectorAll('.lang-bn');
+            if (currentLang === 'en') {
+                enEls.forEach(el => el.classList.add('hidden'));
+                bnEls.forEach(el => el.classList.remove('hidden'));
+                btnText.innerText = 'EN'; currentLang = 'bn';
+            } else {
+                bnEls.forEach(el => el.classList.add('hidden'));
+                enEls.forEach(el => el.classList.remove('hidden'));
+                btnText.innerText = 'BN'; currentLang = 'en';
+            }
+        }
+
+        const demoData = [
+            { q: "Tell me about Sumonix AI ecosystem.", r: "It's a high-reasoning multimodal system built for technical automation, autonomous business logic, and predictive enterprise analytics." },
+            { q: "Current System Integrity Status?", r: "System v2.5 Integrity Verified. All microservices (API Gateway, Supervisor, Agent) operating at optimal 99.9% uptime." },
+            { q: "Origin of Architect?", r: "Designed and engineered in Beanibazar, Sylhet, Bangladesh by ABO Enterprise." }
+        ];
+        let dIndex = 0;
+        async function startDemo() {
+            const qEl = document.getElementById('demo-query');
+            const rEl = document.getElementById('demo-response');
+            if(!qEl || !rEl) return;
+            while(true) {
+                const item = demoData[dIndex];
+                qEl.innerText = ''; rEl.innerText = '';
+                for(let char of item.q){ qEl.innerText += char; await new Promise(r => setTimeout(r, 45)); }
+                await new Promise(r => setTimeout(r, 1200));
+                for(let char of item.r){ rEl.innerText += char; await new Promise(r => setTimeout(r, 30)); }
+                await new Promise(r => setTimeout(r, 4000));
+                dIndex = (dIndex + 1) % demoData.length;
+            }
+        }
+        window.onload = startDemo;
+        if (localStorage.theme === 'light') toggleTheme();
+    </script>
+</body>
+</html>
