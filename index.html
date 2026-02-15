@@ -27,8 +27,7 @@
     </script>
 
     <style>
-        html { scroll-behavior: smooth; } /* Added smooth scrolling */
-        body { font-family: 'Inter', 'Hind Siliguri', sans-serif; transition: all 0.4s ease; overflow-x: hidden; }
+        body { font-family: 'Inter', 'Hind Siliguri', sans-serif; transition: all 0.4s ease; }
         
         .hero-banner { background-size: cover; background-position: center; background-attachment: fixed; position: relative; }
         .dark .hero-banner { background-image: linear-gradient(to bottom, rgba(2, 6, 23, 0.4), rgba(2, 6, 23, 0.8)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop'); }
@@ -67,7 +66,7 @@
         /* Footer CSS Logo for ABO ENTERPRISE */
         .abo-enterprise-css-logo { background: #020617; color: #fff; padding: 10px 25px; border-radius: 50px; font-weight: 900; font-style: italic; border: 2px solid #00f2ff; display: inline-block; letter-spacing: 3px; box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); font-size: 1.2rem;}
 
-        /* Mobile Menu Toggle */
+        /* Added for Mobile Menu Toggle */
         #mobile-menu { display: none; }
         #mobile-menu.active { display: flex; }
     </style>
@@ -88,55 +87,30 @@
             </div>
             
             <div class="hidden lg:flex space-x-6 text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400">
-                <a href="#hero" class="hover:text-primaryBlue dark:hover:text-accentCyan transition lang-en">Home</a>
-                <a href="#hero" class="hover:text-primaryBlue dark:hover:text-accentCyan transition lang-bn hidden">হোম</a>
-                
-                <a href="#workflow" class="hover:text-primaryBlue dark:hover:text-accentCyan transition lang-en">Work</a>
-                <a href="#workflow" class="hover:text-primaryBlue dark:hover:text-accentCyan transition lang-bn hidden">পদ্ধতি</a>
-                
-                <a href="#demo" class="hover:text-primaryBlue dark:hover:text-accentCyan transition lang-en">Demo</a>
-                <a href="#demo" class="hover:text-primaryBlue dark:hover:text-accentCyan transition lang-bn hidden">ডেমো</a>
-                
-                <a href="#download" class="hover:text-primaryBlue dark:hover:text-accentCyan transition lang-en">Download</a>
-                <a href="#download" class="hover:text-primaryBlue dark:hover:text-accentCyan transition lang-bn hidden">ডাউনলোড</a>
-                
-                <a href="#pricing" class="hover:text-primaryBlue dark:hover:text-accentCyan transition lang-en">Pricing</a>
-                <a href="#pricing" class="hover:text-primaryBlue dark:hover:text-accentCyan transition lang-bn hidden">প্রাইসিং</a>
-                
-                <a href="#payment" class="hover:text-primaryBlue dark:hover:text-accentCyan transition lang-en">Payments <span class="text-[8px] text-green-500 lowercase">(bkash/nagad/card)</span></a>
-                <a href="#payment" class="hover:text-primaryBlue dark:hover:text-accentCyan transition lang-bn hidden">পেমেন্ট <span class="text-[8px] text-green-500 lowercase">(bkash/nagad/card)</span></a>
-                
-                <a href="#contact" class="hover:text-primaryBlue dark:hover:text-accentCyan transition text-primaryBlue lang-en">Contact</a>
-                <a href="#contact" class="hover:text-primaryBlue dark:hover:text-accentCyan transition text-primaryBlue lang-bn hidden">যোগাযোগ</a>
+                <a href="#hero" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Home</a>
+                <a href="#workflow" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Work</a>
+                <a href="#demo" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Demo</a>
+                <a href="#download" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Download</a>
+                <a href="#pricing" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Pricing</a>
+                <a href="#payment" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Payments</a>
+                <a href="#contact" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Contact</a>
             </div>
 
             <div class="flex items-center space-x-2 sm:space-x-3">
                 <button onclick="toggleTheme()" class="p-2 rounded-full bg-slate-100 dark:bg-white/10 transition"><i id="theme-icon" class="fas fa-moon text-sm sm:text-base"></i></button>
                 <button onclick="toggleLanguage()" class="px-2 py-1 sm:px-3 sm:py-1 rounded-md bg-primaryBlue text-white text-[9px] sm:text-[10px] font-bold uppercase"><span id="lang-btn-text">BN</span></button>
-                <button onclick="openLoginModal()" class="bg-primaryBlue hover:bg-blue-600 px-3 py-1 sm:px-5 sm:py-2 rounded-xl text-[9px] sm:text-[10px] font-black uppercase text-white tracking-widest transition hidden sm:inline-block lang-en">Sign In</button>
-                <button onclick="openLoginModal()" class="bg-primaryBlue hover:bg-blue-600 px-3 py-1 sm:px-5 sm:py-2 rounded-xl text-[9px] sm:text-[10px] font-black uppercase text-white tracking-widest transition hidden sm:inline-block lang-bn hidden">লগইন</button>
+                <button onclick="openLoginModal()" class="bg-primaryBlue hover:bg-blue-600 px-3 py-1 sm:px-5 sm:py-2 rounded-xl text-[9px] sm:text-[10px] font-black uppercase text-white tracking-widest transition hidden sm:inline-block">Sign In</button>
                 <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-xl text-primaryBlue dark:text-accentCyan"><i class="fas fa-bars"></i></button>
             </div>
         </div>
 
         <div id="mobile-menu" class="absolute top-full left-0 w-full bg-white dark:bg-bgDark border-b dark:border-white/5 flex-col items-center py-4 space-y-4 shadow-xl z-50">
-            <a href="#hero" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-primaryBlue lang-en">Home</a>
-            <a href="#hero" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-primaryBlue lang-bn hidden">হোম</a>
-            
-            <a href="#workflow" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-primaryBlue lang-en">Work</a>
-            <a href="#workflow" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-primaryBlue lang-bn hidden">পদ্ধতি</a>
-            
-            <a href="#demo" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-primaryBlue lang-en">Demo</a>
-            <a href="#demo" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-primaryBlue lang-bn hidden">ডেমো</a>
-            
-            <a href="#pricing" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-primaryBlue lang-en">Pricing</a>
-            <a href="#pricing" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-primaryBlue lang-bn hidden">প্রাইসিং</a>
-            
-            <a href="#contact" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-primaryBlue lang-en">Contact</a>
-            <a href="#contact" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-primaryBlue lang-bn hidden">যোগাযোগ</a>
-            
-            <button onclick="openLoginModal(); toggleMobileMenu();" class="bg-primaryBlue hover:bg-blue-600 px-8 py-3 rounded-xl text-xs font-black uppercase text-white tracking-widest transition lang-en">Sign In</button>
-            <button onclick="openLoginModal(); toggleMobileMenu();" class="bg-primaryBlue hover:bg-blue-600 px-8 py-3 rounded-xl text-xs font-black uppercase text-white tracking-widest transition lang-bn hidden">লগইন</button>
+            <a href="#hero" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-primaryBlue">Home</a>
+            <a href="#workflow" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-primaryBlue">Work</a>
+            <a href="#demo" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-primaryBlue">Demo</a>
+            <a href="#pricing" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 hover:text-primaryBlue">Pricing</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="text-sm font-bold uppercase tracking-widest text-primaryBlue">Contact</a>
+            <button onclick="openLoginModal(); toggleMobileMenu();" class="bg-primaryBlue hover:bg-blue-600 px-8 py-3 rounded-xl text-xs font-black uppercase text-white tracking-widest transition">Sign In</button>
         </div>
     </nav>
 
@@ -145,33 +119,26 @@
             <i class="fas fa-times close-btn" onclick="closeLoginModal()"></i>
             <div class="text-center mb-8">
                 <i class="fas fa-user-circle text-5xl text-primaryBlue mb-4 ai-glow"></i>
-                <h3 class="text-xl sm:text-2xl font-black text-white uppercase tracking-widest lang-en">Portal Access</h3>
-                <h3 class="text-xl sm:text-2xl font-black text-white uppercase tracking-widest lang-bn hidden">পোর্টাল এক্সেস</h3>
-                <p class="text-xs text-gray-500 mt-2 lang-en">Enter your credentials to continue</p>
-                <p class="text-xs text-gray-500 mt-2 lang-bn hidden">লগইন করতে তথ্য দিন</p>
+                <h3 class="text-xl sm:text-2xl font-black text-white uppercase tracking-widest">Portal Access</h3>
+                <p class="text-xs text-gray-500 mt-2">Enter your credentials to continue</p>
             </div>
             <form onsubmit="event.preventDefault();" class="space-y-6">
                 <div>
-                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 lang-en">Username</label>
-                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 lang-bn hidden">ইউজারনেম</label>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Username</label>
                     <div class="relative">
                         <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
                         <input type="text" placeholder="Enter username" class="w-full bg-black/50 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-primaryBlue transition text-sm">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 lang-en">Password</label>
-                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 lang-bn hidden">পাসওয়ার্ড</label>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Password</label>
                     <div class="relative">
                         <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
                         <input type="password" placeholder="••••••••" class="w-full bg-black/50 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-primaryBlue transition text-sm">
                     </div>
                 </div>
-                <button type="submit" class="w-full bg-primaryBlue hover:bg-blue-600 text-white font-bold uppercase text-[11px] tracking-widest py-4 rounded-xl transition shadow-[0_0_15px_rgba(0,114,188,0.5)] lang-en">
+                <button type="submit" class="w-full bg-primaryBlue hover:bg-blue-600 text-white font-bold uppercase text-[11px] tracking-widest py-4 rounded-xl transition shadow-[0_0_15px_rgba(0,114,188,0.5)]">
                     Login securely
-                </button>
-                <button type="submit" class="w-full bg-primaryBlue hover:bg-blue-600 text-white font-bold uppercase text-[11px] tracking-widest py-4 rounded-xl transition shadow-[0_0_15px_rgba(0,114,188,0.5)] lang-bn hidden">
-                    লগইন করুন
                 </button>
             </form>
         </div>
@@ -181,8 +148,7 @@
         <div class="max-w-6xl mx-auto text-center w-full" data-aos="zoom-out">
             <div class="inline-flex items-center bg-white/5 px-3 py-1 sm:px-4 sm:py-1 rounded-full border border-white/10 mb-6 sm:mb-8">
                 <span class="status-pulse mr-2 sm:mr-3"></span>
-                <span class="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-green-500 italic lang-en">Global System Live v2.5</span>
-                <span class="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-green-500 italic lang-bn hidden">গ্লোবাল সিস্টেম লাইভ v২.৫</span>
+                <span class="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-green-500 italic">Global System Live v2.5</span>
             </div>
             <h1 class="text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter leading-tight mb-6 sm:mb-8 bg-gradient-to-b from-slate-900 to-slate-500 dark:from-white dark:to-gray-500 bg-clip-text text-transparent italic">
                 Sumonix <span class="text-primaryBlue dark:text-accentCyan block sm:inline">AI.</span>
@@ -196,11 +162,8 @@
                 <span class="text-[10px] sm:text-sm uppercase tracking-widest font-bold text-primaryBlue block mt-2">বহুভাষী • স্বায়ত্তশাসিত • নিরাপদ • রিয়েল-টাইম</span>
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 px-4">
-                <a href="#download" class="bg-primaryBlue hover:bg-blue-600 text-white px-8 sm:px-14 py-4 sm:py-5 rounded-2xl text-[10px] sm:text-[11px] font-black uppercase tracking-[3px] shadow-2xl transition w-full sm:w-auto lang-en"><i class="fas fa-download mr-2"></i> Download</a>
-                <a href="#download" class="bg-primaryBlue hover:bg-blue-600 text-white px-8 sm:px-14 py-4 sm:py-5 rounded-2xl text-[10px] sm:text-[11px] font-black uppercase tracking-[3px] shadow-2xl transition w-full sm:w-auto lang-bn hidden"><i class="fas fa-download mr-2"></i> ডাউনলোড</a>
-                
-                <a href="#pricing" class="px-8 sm:px-14 py-4 sm:py-5 rounded-2xl text-[10px] sm:text-[11px] font-black uppercase tracking-[3px] border border-slate-300 dark:border-gray-800 hover:bg-white/5 transition w-full sm:w-auto lang-en"><i class="fas fa-credit-card mr-2"></i> Pricing</a>
-                <a href="#pricing" class="px-8 sm:px-14 py-4 sm:py-5 rounded-2xl text-[10px] sm:text-[11px] font-black uppercase tracking-[3px] border border-slate-300 dark:border-gray-800 hover:bg-white/5 transition w-full sm:w-auto lang-bn hidden"><i class="fas fa-credit-card mr-2"></i> প্রাইসিং</a>
+                <a href="#download" class="bg-primaryBlue hover:bg-blue-600 text-white px-8 sm:px-14 py-4 sm:py-5 rounded-2xl text-[10px] sm:text-[11px] font-black uppercase tracking-[3px] shadow-2xl transition w-full sm:w-auto"><i class="fas fa-download mr-2"></i> Download</a>
+                <a href="#pricing" class="px-8 sm:px-14 py-4 sm:py-5 rounded-2xl text-[10px] sm:text-[11px] font-black uppercase tracking-[3px] border border-slate-300 dark:border-gray-800 hover:bg-white/5 transition w-full sm:w-auto"><i class="fas fa-credit-card mr-2"></i> Pricing</a>
             </div>
         </div>
     </section>
@@ -208,36 +171,28 @@
     <section id="workflow" class="py-20 sm:py-32 px-4 sm:px-6 overflow-hidden">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12 sm:mb-20">
-                <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-3 sm:mb-4 lang-en">Ecosystem Workflow</h3>
-                <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-3 sm:mb-4 lang-bn hidden">ইকোসিস্টেম ওয়ার্কফ্লো</h3>
-                <h2 class="text-3xl sm:text-5xl font-black tracking-tight lang-en">Seamless Technical Services.</h2>
-                <h2 class="text-3xl sm:text-5xl font-black tracking-tight lang-bn hidden">নির্ভুল টেকনিক্যাল সার্ভিস।</h2>
+                <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-3 sm:mb-4">Ecosystem Workflow</h3>
+                <h2 class="text-3xl sm:text-5xl font-black tracking-tight">Seamless Technical Services.</h2>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-12 mt-10 sm:mt-16">
                 <div class="premium-card p-6 rounded-[30px] sm:rounded-[40px]" data-aos="fade-up">
                     <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=500" class="project-img rounded-2xl sm:rounded-3xl mb-6 shadow-xl" alt="POS">
                     <h4 class="text-lg sm:text-xl font-bold mb-2 uppercase italic">SmartShop POS</h4>
-                    <p class="text-gray-500 text-[9px] sm:text-[10px] tracking-widest font-bold mb-3 sm:mb-4 text-primaryBlue uppercase italic lang-en">Feature: Inventory & Sales Automation</p>
-                    <p class="text-gray-500 text-[9px] sm:text-[10px] tracking-widest font-bold mb-3 sm:mb-4 text-primaryBlue uppercase italic lang-bn hidden">ফিচার: ইনভেন্টরি ও সেলস অটোমেশন</p>
-                    <p class="text-gray-400 text-xs sm:text-sm font-light lang-en">Advanced point-of-sale system built for ABO Enterprise retail partners.</p>
-                    <p class="text-gray-400 text-xs sm:text-sm font-light lang-bn hidden">ABO এন্টারপ্রাইজ রিটেইল পার্টনারদের জন্য অ্যাডভান্সড POS সিস্টেম।</p>
+                    <p class="text-gray-500 text-[9px] sm:text-[10px] tracking-widest font-bold mb-3 sm:mb-4 text-primaryBlue uppercase italic">Feature: Inventory & Sales Automation</p>
+                    <p class="text-gray-400 text-xs sm:text-sm font-light">Advanced point-of-sale system built for ABO Enterprise retail partners.</p>
                 </div>
                 <div class="premium-card p-6 rounded-[30px] sm:rounded-[40px]" data-aos="fade-up" data-aos-delay="100">
                     <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=500" class="project-img rounded-2xl sm:rounded-3xl mb-6 shadow-xl" alt="Agent">
                     <h4 class="text-lg sm:text-xl font-bold mb-2 uppercase italic">Aegis AI X</h4>
-                    <p class="text-gray-500 text-[9px] sm:text-[10px] tracking-widest font-bold mb-3 sm:mb-4 text-primaryBlue uppercase italic lang-en">Feature: Autonomous Reasoning Engine</p>
-                    <p class="text-gray-500 text-[9px] sm:text-[10px] tracking-widest font-bold mb-3 sm:mb-4 text-primaryBlue uppercase italic lang-bn hidden">ফিচার: অটোনোমাস রিজনিং ইঞ্জিন</p>
-                    <p class="text-gray-400 text-xs sm:text-sm font-light lang-en">Custom agentic ecosystem for technical solution architects.</p>
-                    <p class="text-gray-400 text-xs sm:text-sm font-light lang-bn hidden">টেকনিক্যাল সলিউশন আর্কিটেক্টদের জন্য কাস্টম এজেন্ট ইকোসিস্টেম।</p>
+                    <p class="text-gray-500 text-[9px] sm:text-[10px] tracking-widest font-bold mb-3 sm:mb-4 text-primaryBlue uppercase italic">Feature: Autonomous Reasoning Engine</p>
+                    <p class="text-gray-400 text-xs sm:text-sm font-light">Custom agentic ecosystem for technical solution architects.</p>
                 </div>
                 <div class="premium-card p-6 rounded-[30px] sm:rounded-[40px]" data-aos="fade-up" data-aos-delay="200">
                     <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=500" class="project-img rounded-2xl sm:rounded-3xl mb-6 shadow-xl" alt="Civic Hub">
                     <h4 class="text-lg sm:text-xl font-bold mb-2 uppercase italic">Civic Hub</h4>
-                    <p class="text-gray-400 text-[9px] sm:text-[10px] tracking-widest font-bold mb-3 sm:mb-4 text-primaryBlue uppercase italic lang-en">Feature: Q&A Engagement Engine</p>
-                    <p class="text-gray-400 text-[9px] sm:text-[10px] tracking-widest font-bold mb-3 sm:mb-4 text-primaryBlue uppercase italic lang-bn hidden">ফিচার: Q&A এঙ্গেজমেন্ট ইঞ্জিন</p>
-                    <p class="text-gray-400 text-xs sm:text-sm font-light text-slate-500 lang-en">Platform for citizen engagement and political transparency.</p>
-                    <p class="text-gray-400 text-xs sm:text-sm font-light text-slate-500 lang-bn hidden">নাগরিক সম্পৃক্ততা এবং স্বচ্ছতার জন্য প্ল্যাটফর্ম।</p>
+                    <p class="text-gray-400 text-[9px] sm:text-[10px] tracking-widest font-bold mb-3 sm:mb-4 text-primaryBlue uppercase italic">Feature: Q&A Engagement Engine</p>
+                    <p class="text-gray-400 text-xs sm:text-sm font-light text-slate-500">Platform for citizen engagement and political transparency.</p>
                 </div>
             </div>
         </div>
@@ -246,16 +201,13 @@
     <section id="demo" class="py-20 sm:py-24 px-4 sm:px-6 bg-slate-100 dark:bg-white/[0.02]">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-10 sm:mb-16">
-                <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-3 sm:mb-4 lang-en">Live Animation</h3>
-                <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-3 sm:mb-4 lang-bn hidden">লাইভ এনিমেশন</h3>
-                <h2 class="text-3xl sm:text-5xl font-black tracking-tight lang-en">System v2.5 Experience.</h2>
-                <h2 class="text-3xl sm:text-5xl font-black tracking-tight lang-bn hidden">সিস্টেম v২.৫ অভিজ্ঞতা।</h2>
+                <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-3 sm:mb-4">Live Animation</h3>
+                <h2 class="text-3xl sm:text-5xl font-black tracking-tight">System v2.5 Experience.</h2>
             </div>
             <div class="max-w-5xl mx-auto premium-card rounded-[30px] sm:rounded-[50px] overflow-hidden shadow-2xl relative bg-black/60">
                 <div class="p-6 sm:p-12 min-h-[300px] sm:min-h-[450px] flex flex-col justify-center">
                     <div class="mb-8 sm:mb-12" data-aos="fade-right">
-                        <span class="text-blue-500 font-black text-[9px] sm:text-[11px] uppercase tracking-[4px] mb-2 sm:mb-4 block italic lang-en">User Input:</span>
-                        <span class="text-blue-500 font-black text-[9px] sm:text-[11px] uppercase tracking-[4px] mb-2 sm:mb-4 block italic lang-bn hidden">ইউজার ইনপুট:</span>
+                        <span class="text-blue-500 font-black text-[9px] sm:text-[11px] uppercase tracking-[4px] mb-2 sm:mb-4 block italic">User Input:</span>
                         <p id="demo-query" class="text-xl sm:text-3xl font-light text-gray-400 italic min-h-[3rem]"></p>
                     </div>
                     <div data-aos="fade-left">
@@ -269,10 +221,8 @@
 
     <section id="download" class="py-20 sm:py-32 px-4 sm:px-6 overflow-hidden">
         <div class="max-w-7xl mx-auto text-center mb-12 sm:mb-20">
-            <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-3 sm:mb-4 lang-en">Download Center</h3>
-            <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-3 sm:mb-4 lang-bn hidden">ডাউনলোড সেন্টার</h3>
-            <h2 class="text-3xl sm:text-5xl font-black tracking-tight lang-en">Available on Every OS.</h2>
-            <h2 class="text-3xl sm:text-5xl font-black tracking-tight lang-bn hidden">সকল ওএস-এ উপলব্ধ।</h2>
+            <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-3 sm:mb-4">Download Center</h3>
+            <h2 class="text-3xl sm:text-5xl font-black tracking-tight">Available on Every OS.</h2>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 max-w-7xl mx-auto">
             <div class="premium-card p-6 sm:p-8 rounded-[20px] sm:rounded-[30px] text-center" data-aos="zoom-in">
@@ -305,8 +255,7 @@
 
     <section id="pricing" class="py-20 sm:py-32 px-4 sm:px-6 overflow-hidden">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl sm:text-5xl font-black text-center mb-12 sm:mb-20 tracking-tight italic text-glow uppercase lang-en">Pricing Tiers.</h2>
-            <h2 class="text-3xl sm:text-5xl font-black text-center mb-12 sm:mb-20 tracking-tight italic text-glow uppercase lang-bn hidden">প্রাইসিং প্ল্যান।</h2>
+            <h2 class="text-3xl sm:text-5xl font-black text-center mb-12 sm:mb-20 tracking-tight italic text-glow uppercase">Pricing Tiers.</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
                 <div class="premium-card p-6 sm:p-8 rounded-[30px] sm:rounded-[40px] flex flex-col justify-between" data-aos="fade-up">
                     <div><h4 class="text-gray-500 font-bold text-[9px] sm:text-[10px] uppercase mb-3 sm:mb-4 tracking-widest italic">Free</h4><div class="text-3xl sm:text-4xl font-black mb-4 sm:mb-6">$0</div><ul class="text-gray-500 text-[8px] sm:text-[9px] space-y-2 sm:space-y-3 font-light"><li>100 Msg/mo</li><li>Standard Core</li></ul></div>
@@ -317,8 +266,7 @@
                     <button class="mt-6 sm:mt-8 py-2 sm:py-3 rounded-xl border border-primaryBlue text-[8px] sm:text-[9px] font-bold uppercase w-full">Subscribe</button>
                 </div>
                 <div class="premium-card p-6 sm:p-8 rounded-[30px] sm:rounded-[40px] border-blue-500 bg-blue-500/5 relative lg:scale-105 flex flex-col justify-between shadow-2xl z-10" data-aos="fade-up" data-aos-delay="200">
-                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-[7px] sm:text-[8px] font-black px-3 py-1 sm:px-4 sm:py-1 rounded-full uppercase text-white shadow-lg lang-en">Popular</span>
-                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-[7px] sm:text-[8px] font-black px-3 py-1 sm:px-4 sm:py-1 rounded-full uppercase text-white shadow-lg lang-bn hidden">জনপ্রিয়</span>
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-[7px] sm:text-[8px] font-black px-3 py-1 sm:px-4 sm:py-1 rounded-full uppercase text-white shadow-lg">Popular</span>
                     <div><h4 class="text-accentCyan font-bold text-[9px] sm:text-[10px] uppercase mb-3 sm:mb-4 tracking-widest italic">PRO</h4><div class="text-3xl sm:text-4xl font-black mb-4 sm:mb-6">$15</div><ul class="text-slate-300 text-[8px] sm:text-[9px] space-y-2 sm:space-y-3 font-light"><li>Unlimited Multimodal</li><li>Image Gen</li><li>Priority API</li></ul></div>
                     <button class="mt-6 sm:mt-8 bg-primaryBlue text-white py-2 sm:py-3 rounded-xl text-[8px] sm:text-[9px] font-bold uppercase w-full">Upgrade</button>
                 </div>
@@ -336,25 +284,22 @@
 
     <section class="py-20 sm:py-32 px-4 sm:px-6 bg-white/[0.01]">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl sm:text-5xl font-black text-center mb-12 sm:mb-20 tracking-tight italic uppercase lang-en">Customer Reviews.</h2>
-            <h2 class="text-3xl sm:text-5xl font-black text-center mb-12 sm:mb-20 tracking-tight italic uppercase lang-bn hidden">কাস্টমার রিভিউ।</h2>
+            <h2 class="text-3xl sm:text-5xl font-black text-center mb-12 sm:mb-20 tracking-tight italic uppercase">Customer Reviews.</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
                 <div class="premium-card p-8 sm:p-12 rounded-[30px] sm:rounded-[50px] border border-white/5" data-aos="fade-right">
-                    <div class="flex text-yellow-500 mb-4 sm:mb-6 text-xs sm:text-sm italic"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i> <span class="ml-2 sm:ml-4 text-slate-500 font-bold tracking-widest uppercase text-[8px] sm:text-[9px] mt-1 lang-en">Verified Client</span><span class="ml-2 sm:ml-4 text-slate-500 font-bold tracking-widest uppercase text-[8px] sm:text-[9px] mt-1 lang-bn hidden">ভেরিফাইড ক্লায়েন্ট</span></div>
-                    <p class="text-gray-300 text-base sm:text-xl italic mb-6 sm:mb-8 font-light leading-relaxed lang-en">"The Sumonix AI ecosystem has fundamentally changed our technical efficiency. The reasoning engine is truly autonomous and secure."</p>
-                    <p class="text-gray-300 text-base sm:text-xl italic mb-6 sm:mb-8 font-light leading-relaxed lang-bn hidden">"Sumonix AI ইকোসিস্টেম আমাদের টেকনিক্যাল দক্ষতা সম্পূর্ণ বদলে দিয়েছে। এর ইঞ্জিনটি সত্যিই স্বয়ংক্রিয় এবং নিরাপদ।"</p>
+                    <div class="flex text-yellow-500 mb-4 sm:mb-6 text-xs sm:text-sm italic"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i> <span class="ml-2 sm:ml-4 text-slate-500 font-bold tracking-widest uppercase text-[8px] sm:text-[9px] mt-1">Verified Client</span></div>
+                    <p class="text-gray-300 text-base sm:text-xl italic mb-6 sm:mb-8 font-light leading-relaxed">"The Sumonix AI ecosystem has fundamentally changed our technical efficiency. The reasoning engine is truly autonomous and secure."</p>
                     <div class="flex items-center space-x-4 sm:space-x-6">
                         <div class="w-12 h-12 sm:w-16 sm:h-16 bg-blue-900/30 rounded-2xl flex items-center justify-center font-black text-blue-500 border border-blue-500/20 shadow-inner text-sm sm:text-base">AK</div>
-                        <div><h5 class="font-black text-white italic tracking-tighter text-sm sm:text-base lang-en">Ahmed Kabir</h5><h5 class="font-black text-white italic tracking-tighter text-sm sm:text-base lang-bn hidden">আহমেদ কবির</h5><p class="text-[8px] sm:text-[9px] text-gray-600 uppercase tracking-widest font-black lang-en">Tech Director</p><p class="text-[8px] sm:text-[9px] text-gray-600 uppercase tracking-widest font-black lang-bn hidden">টেক ডিরেক্টর</p></div>
+                        <div><h5 class="font-black text-white italic tracking-tighter text-sm sm:text-base">Ahmed Kabir</h5><p class="text-[8px] sm:text-[9px] text-gray-600 uppercase tracking-widest font-black">Tech Director</p></div>
                     </div>
                 </div>
                 <div class="premium-card p-8 sm:p-12 rounded-[30px] sm:rounded-[50px] border border-white/5" data-aos="fade-left">
-                    <div class="flex text-yellow-500 mb-4 sm:mb-6 text-xs sm:text-sm italic"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i> <span class="ml-2 sm:ml-4 text-slate-500 font-bold tracking-widest uppercase text-[8px] sm:text-[9px] mt-1 lang-en">Partner</span><span class="ml-2 sm:ml-4 text-slate-500 font-bold tracking-widest uppercase text-[8px] sm:text-[9px] mt-1 lang-bn hidden">পার্টনার</span></div>
-                    <p class="text-gray-300 text-base sm:text-xl italic mb-6 sm:mb-8 font-light leading-relaxed lang-en">"Masterful architecture. The system's ability to handle complex multilingual nuances is the best I've seen in any AI platform."</p>
-                    <p class="text-gray-300 text-base sm:text-xl italic mb-6 sm:mb-8 font-light leading-relaxed lang-bn hidden">"চমৎকার আর্কিটেকচার। জটিল বহুভাষিক বিষয়গুলো সামলানোর ক্ষমতা যেকোনো এআই প্ল্যাটফর্মের চেয়ে সেরা।"</p>
+                    <div class="flex text-yellow-500 mb-4 sm:mb-6 text-xs sm:text-sm italic"><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i><i class="fas fa-star mr-1"></i> <span class="ml-2 sm:ml-4 text-slate-500 font-bold tracking-widest uppercase text-[8px] sm:text-[9px] mt-1">Partner</span></div>
+                    <p class="text-gray-300 text-base sm:text-xl italic mb-6 sm:mb-8 font-light leading-relaxed">"Masterful architecture. The system's ability to handle complex multilingual nuances is the best I've seen in any AI platform."</p>
                     <div class="flex items-center space-x-4 sm:space-x-6">
                         <div class="w-12 h-12 sm:w-16 sm:h-16 bg-slate-800 rounded-2xl flex items-center justify-center font-black text-slate-400 border border-slate-400/20 shadow-inner text-sm sm:text-base">JD</div>
-                        <div><h5 class="font-black text-white italic tracking-tighter text-sm sm:text-base lang-en">John Doe</h5><h5 class="font-black text-white italic tracking-tighter text-sm sm:text-base lang-bn hidden">জন ডো</h5><p class="text-[8px] sm:text-[9px] text-gray-600 uppercase tracking-widest font-black lang-en">Systems Architect</p><p class="text-[8px] sm:text-[9px] text-gray-600 uppercase tracking-widest font-black lang-bn hidden">সিস্টেম আর্কিটেক্ট</p></div>
+                        <div><h5 class="font-black text-white italic tracking-tighter text-sm sm:text-base">John Doe</h5><p class="text-[8px] sm:text-[9px] text-gray-600 uppercase tracking-widest font-black">Systems Architect</p></div>
                     </div>
                 </div>
             </div>
@@ -364,10 +309,8 @@
     <section id="payment" class="py-20 sm:py-24 px-4 sm:px-6 bg-slate-100 dark:bg-white/[0.02]">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-10 sm:mb-16">
-                <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-3 sm:mb-4 lang-en">Gateways</h3>
-                <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-3 sm:mb-4 lang-bn hidden">পেমেন্ট মেথড</h3>
-                <h2 class="text-3xl sm:text-4xl font-black tracking-tight lang-en">Global & Local Payments.</h2>
-                <h2 class="text-3xl sm:text-4xl font-black tracking-tight lang-bn hidden">গ্লোবাল ও লোকাল পেমেন্ট।</h2>
+                <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-3 sm:mb-4">Gateways</h3>
+                <h2 class="text-3xl sm:text-4xl font-black tracking-tight">Global & Local Payments.</h2>
                 <p class="text-[10px] sm:text-xs text-gray-500 mt-2 uppercase tracking-widest">bKash | Nagad | Rocket | Upay | Card | Stripe</p>
             </div>
             
@@ -406,23 +349,19 @@
     <section id="contact" class="py-20 sm:py-32 px-4 sm:px-6 overflow-hidden">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-20 items-center">
             <div data-aos="fade-right">
-                <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-4 sm:mb-8 text-center sm:text-left lang-en">Global Reach</h3>
-                <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-4 sm:mb-8 text-center sm:text-left lang-bn hidden">গ্লোবাল রিচ</h3>
-                <h4 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter leading-tight mb-8 sm:mb-10 text-slate-900 dark:text-white text-center sm:text-left lang-en">Get in Touch.</h4>
-                <h4 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter leading-tight mb-8 sm:mb-10 text-slate-900 dark:text-white text-center sm:text-left lang-bn hidden">যোগাযোগ করুন।</h4>
+                <h3 class="text-primaryBlue font-black text-[9px] sm:text-[10px] uppercase tracking-[8px] mb-4 sm:mb-8 text-center sm:text-left">Global Reach</h3>
+                <h4 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter leading-tight mb-8 sm:mb-10 text-slate-900 dark:text-white text-center sm:text-left">Get in Touch.</h4>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
                     <div class="space-y-3 sm:space-y-4 text-slate-600 dark:text-gray-400 text-xs sm:text-sm bg-white/5 p-4 rounded-2xl border border-white/5">
-                        <h5 class="text-primaryBlue font-bold uppercase tracking-widest text-[10px] sm:text-xs border-b border-primaryBlue/20 pb-2 mb-3 sm:mb-4 lang-en">Company</h5>
-                        <h5 class="text-primaryBlue font-bold uppercase tracking-widest text-[10px] sm:text-xs border-b border-primaryBlue/20 pb-2 mb-3 sm:mb-4 lang-bn hidden">কোম্পানি</h5>
+                        <h5 class="text-primaryBlue font-bold uppercase tracking-widest text-[10px] sm:text-xs border-b border-primaryBlue/20 pb-2 mb-3 sm:mb-4">Company</h5>
                         <p class="flex items-center truncate"><i class="fas fa-globe text-primaryBlue w-5 sm:w-6"></i> <a href="https://www.aboenterprice.com" target="_blank" class="hover:text-primaryBlue transition-colors font-medium truncate">aboenterprice.com</a></p>
                         <p class="flex items-center truncate"><i class="fas fa-envelope text-primaryBlue w-5 sm:w-6"></i> <a href="mailto:abo.enterprise@gmail.com" class="hover:text-primaryBlue transition-colors text-[10px] sm:text-xs truncate">abo.enterprise@gmail.com</a></p>
                         <p class="flex items-center"><i class="fab fa-facebook text-primaryBlue w-5 sm:w-6"></i> <a href="https://www.facebook.com/abo.enterprise" target="_blank" class="hover:text-primaryBlue transition-colors">abo.enterprise</a></p>
                     </div>
 
                     <div class="space-y-3 sm:space-y-4 text-slate-600 dark:text-gray-400 text-xs sm:text-sm bg-white/5 p-4 rounded-2xl border border-white/5">
-                        <h5 class="text-primaryBlue font-bold uppercase tracking-widest text-[10px] sm:text-xs border-b border-primaryBlue/20 pb-2 mb-3 sm:mb-4 lang-en">Founder</h5>
-                        <h5 class="text-primaryBlue font-bold uppercase tracking-widest text-[10px] sm:text-xs border-b border-primaryBlue/20 pb-2 mb-3 sm:mb-4 lang-bn hidden">ফাউন্ডার</h5>
+                        <h5 class="text-primaryBlue font-bold uppercase tracking-widest text-[10px] sm:text-xs border-b border-primaryBlue/20 pb-2 mb-3 sm:mb-4">Founder</h5>
                         <p class="font-bold text-slate-800 dark:text-white mb-1 sm:mb-2 truncate"><i class="fas fa-user-tie text-primaryBlue w-5 sm:w-6"></i> Mumain Ahmed</p>
                         <p class="flex items-center"><i class="fas fa-phone text-primaryBlue w-5 sm:w-6"></i> <a href="tel:+8801825007977" class="hover:text-primaryBlue transition-colors">+8801825007977</a></p>
                         <p class="flex items-center truncate"><i class="fas fa-envelope text-primaryBlue w-5 sm:w-6"></i> <a href="mailto:m.a.sumon92@gmail.com" class="hover:text-primaryBlue transition-colors text-[10px] sm:text-xs truncate">m.a.sumon92@gmail.com</a></p>
@@ -436,7 +375,7 @@
                 </div>
             </div>
             <div class="rounded-[30px] sm:rounded-[40px] overflow-hidden grayscale invert dark:opacity-40 hover:grayscale-0 hover:invert-0 hover:opacity-100 transition-all duration-700 h-[300px] sm:h-[450px] shadow-2xl border border-white/5 w-full" data-aos="fade-left">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14467.570776510307!2d92.17953255!3d24.83549645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3751ca0b292df27f%3A0x6e25f822a1b16260!2sBeanibazar!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115809.91689255855!2d92.10091807353982!3d24.8967914486558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3751cd2c65f9bf69%3A0xc6c429bbbb55b3ff!2sBeanibazar!5e0!3m2!1sen!2sbd!4v1708040000000!5m2!1sen!2sbd" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
@@ -449,8 +388,7 @@
                 <h3 class="text-xl sm:text-3xl font-black mb-2 sm:mb-4 lang-bn hidden uppercase tracking-tighter text-center">লাইসেন্স অ্যাক্টিভেশন</h3>
                 <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8">
                     <input type="text" placeholder="XXXXX-XXXXX-XXXXX-XXXXX-XXXXX" class="flex-1 bg-white dark:bg-black/40 border border-slate-300 dark:border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-6 py-3 sm:py-4 text-primaryBlue dark:text-accentCyan font-mono tracking-widest focus:outline-none shadow-inner uppercase text-center text-xs sm:text-base w-full">
-                    <button class="bg-primaryBlue text-white px-6 sm:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold uppercase text-[9px] sm:text-[10px] tracking-widest shadow-lg hover:bg-blue-600 transition w-full sm:w-auto lang-en">Verify</button>
-                    <button class="bg-primaryBlue text-white px-6 sm:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold uppercase text-[9px] sm:text-[10px] tracking-widest shadow-lg hover:bg-blue-600 transition w-full sm:w-auto lang-bn hidden">যাচাই করুন</button>
+                    <button class="bg-primaryBlue text-white px-6 sm:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold uppercase text-[9px] sm:text-[10px] tracking-widest shadow-lg hover:bg-blue-600 transition w-full sm:w-auto">Verify</button>
                 </div>
             </div>
         </div>
@@ -472,17 +410,8 @@
         </a>
     </div>
 
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // Smooth scroll implementation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
         AOS.init({ duration: 1000, once: true });
 
         // Mobile Menu Toggle
@@ -491,28 +420,20 @@
             menu.classList.toggle('active');
         }
 
-        // Theme Toggle (Saves to LocalStorage)
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('theme-icon');
             if (html.classList.contains('dark')) {
                 html.classList.replace('dark', 'light');
                 icon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'light');
+                localStorage.theme = 'light';
             } else {
                 html.classList.replace('light', 'dark');
                 icon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'dark');
+                localStorage.theme = 'dark';
             }
         }
 
-        // Apply saved theme on load
-        if (localStorage.getItem('theme') === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-            document.documentElement.classList.replace('dark', 'light');
-            document.getElementById('theme-icon').classList.replace('fa-moon', 'fa-sun');
-        }
-
-        // Language Toggle
         let currentLang = 'en';
         function toggleLanguage() {
             const btnText = document.getElementById('lang-btn-text');
@@ -521,17 +442,14 @@
             if (currentLang === 'en') {
                 enEls.forEach(el => el.classList.add('hidden'));
                 bnEls.forEach(el => el.classList.remove('hidden'));
-                btnText.innerText = 'EN'; 
-                currentLang = 'bn';
+                btnText.innerText = 'EN'; currentLang = 'bn';
             } else {
                 bnEls.forEach(el => el.classList.add('hidden'));
                 enEls.forEach(el => el.classList.remove('hidden'));
-                btnText.innerText = 'BN'; 
-                currentLang = 'en';
+                btnText.innerText = 'BN'; currentLang = 'en';
             }
         }
 
-        // Live Demo Typing Animation Logic
         const demoData = [
             { q: "Tell me about Sumonix AI ecosystem.", r: "It's a high-reasoning multimodal system built for technical automation, autonomous business logic, and predictive enterprise analytics." },
             { q: "Current System Integrity Status?", r: "System v2.5 Integrity Verified. All microservices (API Gateway, Supervisor, Agent) operating at optimal 99.9% uptime." },
@@ -553,7 +471,6 @@
             }
         }
 
-        // Login Modal Controls
         function openLoginModal() {
             document.getElementById('loginModal').classList.add('active');
             document.body.style.overflow = 'hidden'; 
@@ -569,9 +486,8 @@
             }
         }
 
-        // Initialize Demo
         window.onload = startDemo;
+        if (localStorage.theme === 'light') toggleTheme();
     </script>
 </body>
 </html>
-
