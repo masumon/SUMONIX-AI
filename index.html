@@ -28,9 +28,10 @@
 
     <style>
         body { font-family: 'Inter', 'Hind Siliguri', sans-serif; transition: all 0.4s ease; }
+        
         .hero-banner { background-size: cover; background-position: center; background-attachment: fixed; position: relative; }
-        .dark .hero-banner { background-image: linear-gradient(to bottom, rgba(2, 6, 23, 0.4), rgba(2, 6, 23, 0.8)), url('desktop.png'); }
-        .light .hero-banner { background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6)), url('desktop.png'); }
+        .dark .hero-banner { background-image: linear-gradient(to bottom, rgba(2, 6, 23, 0.4), rgba(2, 6, 23, 0.8)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop'); }
+        .light .hero-banner { background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop'); }
         
         .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
         .premium-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.5s; }
@@ -50,9 +51,20 @@
         .project-img:hover { filter: grayscale(0%); }
 
         /* Integrated Payment Logos */
-        .bkash-svg { background: #e2136e; padding: 10px; border-radius: 8px; font-weight: 900; font-style: italic; color: white; display: inline-block; }
-        .nagad-svg { background: #f37021; padding: 10px; border-radius: 8px; font-weight: 900; color: white; display: inline-block; }
-        .rocket-svg { background: #8c1515; padding: 10px; border-radius: 8px; font-weight: 900; color: white; display: inline-block; }
+        .bkash-svg { background: #e2136e; padding: 10px; border-radius: 8px; font-weight: 900; font-style: italic; color: white; display: inline-block; font-family: sans-serif;}
+        .nagad-svg { background: #f37021; padding: 10px; border-radius: 8px; font-weight: 900; color: white; display: inline-block; font-family: sans-serif;}
+        .rocket-svg { background: #8c1515; padding: 10px; border-radius: 8px; font-weight: 900; color: white; display: inline-block; font-family: sans-serif;}
+
+        /* [NEW] Login Modal Styles */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 9999; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-content { background: #0f172a; border: 1px solid #1e293b; padding: 40px; rounded-3xl; width: 90%; max-width: 400px; transform: scale(0.9); transition: transform 0.3s ease; box-shadow: 0 25px 50px rgba(0, 242, 255, 0.1); border-radius: 24px; position: relative;}
+        .modal-overlay.active .modal-content { transform: scale(1); }
+        .close-btn { position: absolute; top: 20px; right: 20px; color: #64748b; cursor: pointer; transition: color 0.2s; font-size: 1.5rem; }
+        .close-btn:hover { color: #fff; }
+        
+        /* [UPDATED] Footer CSS Logo for ABO ENTERPRISE */
+        .abo-enterprise-css-logo { background: #020617; color: #fff; padding: 10px 25px; border-radius: 50px; font-weight: 900; font-style: italic; border: 2px solid #00f2ff; display: inline-block; letter-spacing: 3px; box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); font-size: 1.2rem;}
     </style>
 </head>
 <body class="bg-bgLight text-slate-900 dark:bg-bgDark dark:text-white overflow-x-hidden">
@@ -77,16 +89,46 @@
                 <a href="#download" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Download</a>
                 <a href="#pricing" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Pricing</a>
                 <a href="#payment" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Payments</a>
-                <a href="#contact" class="hover:text-primaryBlue dark:hover:text-accentCyan transition text-primaryBlue">Contact</a>
+                <a href="#contact" class="hover:text-primaryBlue dark:hover:text-accentCyan transition">Contact</a>
             </div>
 
             <div class="flex items-center space-x-3">
                 <button onclick="toggleTheme()" class="p-2 rounded-full bg-slate-100 dark:bg-white/10 transition"><i id="theme-icon" class="fas fa-moon"></i></button>
                 <button onclick="toggleLanguage()" class="px-3 py-1 rounded-md bg-primaryBlue text-white text-[10px] font-bold uppercase"><span id="lang-btn-text">BN</span></button>
-                <a href="#dashboard" class="bg-primaryBlue hover:bg-blue-600 px-5 py-2 rounded-xl text-[10px] font-black uppercase text-white tracking-widest">Sign In</a>
+                <button onclick="openLoginModal()" class="bg-primaryBlue hover:bg-blue-600 px-5 py-2 rounded-xl text-[10px] font-black uppercase text-white tracking-widest transition">Sign In</button>
             </div>
         </div>
     </nav>
+
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-content">
+            <i class="fas fa-times close-btn" onclick="closeLoginModal()"></i>
+            <div class="text-center mb-8">
+                <i class="fas fa-user-circle text-5xl text-primaryBlue mb-4 ai-glow"></i>
+                <h3 class="text-2xl font-black text-white uppercase tracking-widest">Portal Access</h3>
+                <p class="text-xs text-gray-500 mt-2">Enter your credentials to continue</p>
+            </div>
+            <form onsubmit="event.preventDefault();" class="space-y-6">
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Username</label>
+                    <div class="relative">
+                        <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                        <input type="text" placeholder="Enter username" class="w-full bg-black/50 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-primaryBlue transition">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Password</label>
+                    <div class="relative">
+                        <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                        <input type="password" placeholder="••••••••" class="w-full bg-black/50 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-primaryBlue transition">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-primaryBlue hover:bg-blue-600 text-white font-bold uppercase text-[11px] tracking-widest py-4 rounded-xl transition shadow-[0_0_15px_rgba(0,114,188,0.5)]">
+                    Login securely
+                </button>
+            </form>
+        </div>
+    </div>
 
     <section id="hero" class="hero-banner min-h-screen flex items-center justify-center px-6 pt-20">
         <div class="max-w-6xl mx-auto text-center" data-aos="zoom-out">
@@ -133,10 +175,10 @@
                     <p class="text-gray-400 text-sm font-light">Custom agentic ecosystem for technical solution architects.</p>
                 </div>
                 <div class="premium-card p-6 rounded-[40px]" data-aos="fade-up" data-aos-delay="200">
-                    <img src="civic picture.jpeg" class="project-img rounded-3xl mb-6 shadow-xl" alt="Civic">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=500" class="project-img rounded-3xl mb-6 shadow-xl" alt="Civic Hub">
                     <h4 class="text-xl font-bold mb-2 uppercase italic">Civic Hub</h4>
                     <p class="text-gray-400 text-[10px] tracking-widest font-bold mb-4 text-primaryBlue uppercase italic">Feature: Q&A Engagement Engine</p>
-                    <p class="text-gray-400 text-sm font-light text-slate-500">platform for citizen engagement and political transparency.</p>
+                    <p class="text-gray-400 text-sm font-light text-slate-500">Platform for citizen engagement and political transparency.</p>
                 </div>
             </div>
         </div>
@@ -329,7 +371,7 @@
                 </div>
             </div>
             <div class="rounded-[40px] overflow-hidden grayscale invert dark:opacity-40 hover:grayscale-0 hover:invert-0 hover:opacity-100 transition-all duration-700 h-[450px] shadow-2xl border border-white/5" data-aos="fade-left">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115858.98363712882!2d92.1009139!3d24.8433989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3751ca3861219b4b%3A0xf601e3505c2a13cc!2sBeanibazar%20Upazila!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14480.957962453675!2d92.1764642!3d24.8557342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3751ca8c90060931%3A0xc3f1f1fcce2eef0d!2sBeanibazar!5e0!3m2!1sen!2sbd!4v1707000000000!5m2!1sen!2sbd" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
@@ -350,8 +392,7 @@
 
     <footer class="bg-slate-100 dark:bg-black py-20 px-6 border-t border-slate-200 dark:border-white/5 text-center">
         <div class="flex flex-col items-center mb-8">
-            <img src="logo final.jpeg" alt="Logo" class="h-14 mb-4 rounded-full opacity-80 border-2 border-primaryBlue/20">
-            <h5 class="text-sm font-black italic tracking-widest uppercase text-slate-800 dark:text-slate-200">ABO ENTERPRISE</h5>
+            <span class="abo-enterprise-css-logo mb-4">ABO ENTERPRISE</span>
         </div>
         <p class="text-[10px] font-bold uppercase tracking-[4px] text-slate-500 mb-2">© 2026 ABO ENTERPRISE | <a href="https://www.aboenterprice.com" class="hover:text-primaryBlue transition-colors">WWW.ABOENTERPRICE.COM</a></p>
         <p class="text-[10px] font-bold uppercase tracking-[4px] text-slate-500">INTEGRATED SYSTEMS ARCHITECT: MUMAIN AHMED SUMON</p>
@@ -369,6 +410,7 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
+        // Theme Swapping Script
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('theme-icon');
@@ -383,6 +425,7 @@
             }
         }
 
+        // Language Translation Script
         let currentLang = 'en';
         function toggleLanguage() {
             const btnText = document.getElementById('lang-btn-text');
@@ -399,6 +442,7 @@
             }
         }
 
+        // Live Demo Terminal Animation Logic
         const demoData = [
             { q: "Tell me about Sumonix AI ecosystem.", r: "It's a high-reasoning multimodal system built for technical automation, autonomous business logic, and predictive enterprise analytics." },
             { q: "Current System Integrity Status?", r: "System v2.5 Integrity Verified. All microservices (API Gateway, Supervisor, Agent) operating at optimal 99.9% uptime." },
@@ -419,6 +463,24 @@
                 dIndex = (dIndex + 1) % demoData.length;
             }
         }
+        
+        // [NEW] Login Modal Scripts
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        }
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target == modal) {
+                closeLoginModal();
+            }
+        }
+
         window.onload = startDemo;
         if (localStorage.theme === 'light') toggleTheme();
     </script>
